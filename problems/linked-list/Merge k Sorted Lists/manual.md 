@@ -1,0 +1,54 @@
+```variant#1
+func mergeKLists(lists []*ListNode) *ListNode {
+	dummy := &ListNode{}
+	cur := dummy
+
+	for {
+		// minIndex - нужен чтобы двигаться по списку из которого взяли minNode
+		minNode, minIndex := getMinNode(lists) // Находим минимальный элемент среди списков
+		if minNode == nil {                    // Завершаем цикл если вернулся nil, возвращаем dummy.Next
+			break
+		}
+		cur.Next = minNode                     // put
+		lists[minIndex] = lists[minIndex].Next // Сдвинули указатель в списке в котором был найден minNode
+		cur = cur.Next                         // move
+	}
+
+	return dummy.Next
+}
+
+func getMinNode(lists []*ListNode) (node *ListNode, index int) {
+	min := math.MaxInt32
+
+	for i, n := range lists {
+		if n == nil {
+			continue
+		}
+		if n.Val < min {
+			node = n 
+			index = i
+			min = n.Val
+		}
+	}
+	return
+}
+```
+
+Оценка по времени: O(n), где n - размер списка
+Объяснения:
+при вычислении len, O(n)
+при поиске элемента для удаления, так же O(n)
+В сумме в худшем случае О(2n), в big аннотации O(n)
+В лучшем случае O(2)
+
+Оценка по памяти:  
+O(1)
+Не используем рекурсию поэтому O(1)
+
+Объяснение решения:
+1. создаем фиктивную вершину dummyNode
+2. вычисляем длину списка вместе с dummyNode
+3. при итерации по списку доходим до элемента, после которого удаляемый (length-n-1)
+4. возвращает результат, начиная с dummyNode.Next
+
+

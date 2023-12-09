@@ -1,0 +1,43 @@
+```variant#1
+func reorderList(head *ListNode) {
+	tmp := preMid(head) 
+	p2 := reversReorder(tmp.Next)
+	tmp.Next = nil
+
+	new_Head, p1, p1_next := head, head, head
+
+	for p2 != nil {
+		p1_next = p1.Next
+		p1.Next = p2
+		p1 = p2
+		p2 = p1_next
+	}
+	head = new_Head
+}
+
+func preMid(head *ListNode) *ListNode {
+	slow, fast := head, head
+
+	for fast != nil && fast.Next != nil && fast.Next.Next != nil {
+		slow = slow.Next
+		fast = fast.Next.Next
+	}
+	return slow
+}
+
+func reversReorder(head *ListNode) *ListNode {
+	var prev *ListNode = nil
+	tmp, cur := head, head
+
+	for cur != nil {
+		tmp = cur
+		cur = cur.Next
+		tmp.Next = prev
+		prev = tmp
+	}
+
+	return prev
+}
+```
+
+

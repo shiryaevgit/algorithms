@@ -1,0 +1,43 @@
+```variant#1
+ 
+func detectCycle(head *ListNode) *ListNode {
+
+    slow, fast := head, head
+    
+    for fast != nil && fast.Next != nil {
+        slow = slow.Next
+        fast = fast.Next.Next
+        
+        if slow == fast {
+            break 
+        }
+    }
+    
+    if fast == nil || fast.Next == nil {
+        return nil
+    }
+    
+    slow = head
+    for slow != fast {
+        slow = slow.Next
+        fast = fast.Next
+    }
+    
+    return fast 
+}
+```
+
+Оценка по времени: O(n), где n - размер списка
+Оценка по памяти:O(1)
+
+
+Объяснение решения:
+1. после того как два указателя сошлись
+2. запускаем новый цикл, обнуляем slow
+3. slow и fast сойдутся в точке входа. алгоритм обнаружения циклов Флойда
+
+
+
+```variant#2
+
+```

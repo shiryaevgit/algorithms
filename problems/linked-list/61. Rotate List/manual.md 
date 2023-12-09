@@ -1,0 +1,44 @@
+```variant#1
+func rotateRight(head *ListNode, k int) *ListNode {
+	if head == nil || k == 0 {
+		return head 
+	}
+
+	length := 1
+	cur := head
+
+	for cur.Next != nil {
+		cur = cur.Next
+		length++
+	}
+	cur.Next = head // Делаем цикл
+
+	k = k % length // вернет остаток, то насколько надо сдвинуть
+	stepsToNewHead := length - k
+
+	for i := 0; i < stepsToNewHead; i++ {
+		cur = cur.Next
+	}
+
+	newHead := cur.Next
+	cur.Next = nil // рвем цикл перед newHead
+
+	return newHead
+}
+```
+
+Оценка по времени: O(n), где n - размер списка
+Оценка по памяти:O(1)
+Не используем рекурсию поэтому O(1)
+
+Объяснение решения:
+1. прописываем ограничения при пустом списке или k=0
+2. вычисляем длину и делаем двусвязаным цикл
+3. находим stepsToNewHead, для сброса лишни итерации если k>length
+4. в цикле находим newHead, и рвем связи с ним через cur.Next = nil
+5. возвращаем newHead
+
+
+```variant#2
+
+```

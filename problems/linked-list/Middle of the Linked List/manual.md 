@@ -1,0 +1,24 @@
+```variant
+func middleNode(head *ListNode) *ListNode {
+   slow,fast:=head,head
+   
+   for fast!=nil|| fast.Next!=nil{
+       slow=slow.Next
+       fast=fast.Next.Next
+   } 
+   return slow
+}
+```
+
+Оценка по времени: O(n), где n - размер списка 
+Объяснения: 
+в лучшем при len=1 или 2, O(1)
+
+Оценка по памяти:  
+O(1)
+Не используем рекурсию поэтому O(1)  
+
+Объяснение решения:
+1. создаем два указателя, fast будет двигаться в два раза быстрее slow
+2. в цикле при условии fast!=nil && fast.next!=nil ищем необходимы элемент на него будет указывать slow 
+3. возвращаем slow

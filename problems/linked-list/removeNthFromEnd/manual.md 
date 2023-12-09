@@ -1,0 +1,79 @@
+```variant#1
+func removeNthFromEnd(head *ListNode, n int) *ListNode {
+	length := 0
+	curr := head
+
+	for curr != nil {
+		length++
+		curr = curr.Next
+	}
+	dummyNode := &ListNode{Next: head}
+	curr = dummyNode
+
+	for i := 0; i < length-n; i++ {
+		curr = curr.Next
+	}
+	curr.Next = curr.Next.Next
+
+	return dummyNode.Next
+}
+```
+
+Оценка по времени: O(n), где n - размер списка 
+Объяснения: 
+при вычислении len, O(n)
+при поиске элемента для удаления, так же O(n) 
+В сумме в худшем случае О(2n), в big аннотации O(n)
+В лучшем случае O(2)
+
+Оценка по памяти:  
+O(1)
+Не используем рекурсию поэтому O(1)  
+
+Объяснение решения:
+1. создаем фиктивную вершину dummyNode
+2. вычисляем длину списка вместе с dummyNode
+3. при итерации по списку доходим до элемента, после которого удаляемый (length-n-1)
+4. возвращает результат, начиная с dummyNode.Next
+
+
+```variant#2
+func removeNthFromEnd2(head *ListNode, n int) *ListNode {
+	dummyNode := &ListNode{Next: head}
+	fast := dummyNode
+
+	for i := 0; i < n+1; i++ {
+		fast = fast.Next
+	}
+
+	slow := dummyNode
+	for fast != nil {
+		fast = fast.Next
+		slow = slow.Next
+	}
+	slow.Next = slow.Next.Next
+
+	return dummyNode.Next
+}
+```
+Оценка по времени: O(N), где N - размер списка
+Объяснения:
+
+При вычислении fast, O(N)
+в лучшем, при n=1 и len=1, O(1)
+в худшем, если удаляем первый элемент в списке при n=len O(N)
+
+При поиске элемента для удаления, O(N)
+В худшем, если удаляем последний, то O(N)
+В лучшем, если удаляем первый элемент, то O(1)
+
+Оценка по памяти:  
+O(1)
+Не используем рекурсию поэтому O(1)
+
+Объяснение решения:
+1. создаем фиктивную вершину dummyNode
+2. создаем и смещаем указатель fast на n+1 (далее это расстояние с конца списка до удаляемого элемента)
+3. создаем указатель slow, в цикле смещаем fast и slow пока fast!= nil
+4. пропускаем удаляемый элемент slow.next=slow.next.next
+5. возвращает результат, начиная с dummyNode.Next

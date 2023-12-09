@@ -1,0 +1,52 @@
+```
+func isPalindrome(head *ListNode) bool {
+	p1 := head
+	p2 := mid(head)
+	p2 = rev(p2)
+
+	for p2 != nil {
+		if p1.Val != p2.Val {
+			return false
+		}
+		p1 = p1.Next
+		p2 = p2.Next
+	}
+	return true
+}
+
+func mid(head *ListNode) *ListNode {
+	slow, fast := head, head
+	for fast != nil && fast.Next != nil {
+		slow = slow.Next
+		fast = fast.Next.Next
+	}
+	return slow
+}
+func rev(head *ListNode) *ListNode {
+	var rev *ListNode = nil
+	cur, tmp := head, head
+
+	for cur != nil {
+		tmp = cur
+		cur = cur.Next
+		tmp.Next = rev
+		rev = tmp
+	}
+
+	return tmp
+}
+```
+
+Оценка по времени: O(n), где n - размер списка
+
+
+Оценка по памяти: O(1)
+Не используем рекурсию поэтому O(1)
+
+Объяснение решения:
+1. находим середину списка
+2. делаем реверс
+3. идем по циклу пока p2!=nil(дойдем до центрального элемента) и сравниваем значение каждого элемента изначального списка, с новым(обратным) p1.Val == p2.Val
+4. возвращает результат
+
+

@@ -1,0 +1,49 @@
+```variant#1
+func nextLargerNodes(head *ListNode) []int {
+	cur, tmp := head, head
+	length := 0
+	i := 0
+
+	for tmp != nil {
+		length++
+		tmp = tmp.Next
+	}
+	res := make([]int, length)
+
+	for cur != nil {
+		tmp = cur.Next
+
+		for tmp != nil {
+			if cur.Val < tmp.Val {
+				res[i] = tmp.Val
+				break
+			} else {
+				tmp = tmp.Next
+			}
+		}
+		i++
+		cur = cur.Next
+	}
+	return res
+}
+```
+
+Оценка по времени: O(n^2), где n - размер списка
+Объяснения:
+3 цикла, два из них вложены друг в друга = n+n^2
+
+Оценка по памяти:  
+O(1)
+Не используем рекурсию поэтому O(1)
+
+Объяснение решения:
+1. вычисляем длину списка, чтобы заранее знать какое колчиество памяти аллоцировать для res[]
+2. в цикле пройдем по каждому элементу и сравним его с полсдеющими, 
+в случае если cur.Val < tmp.Val, то изменим значение в res
+3. если нет то смещаемся дальше по списку
+4. возвращаем res[]
+
+
+```variant#2
+
+```
