@@ -9,11 +9,11 @@ func main() {
 	n := 1000000
 	nCPU := runtime.NumCPU()
 	slice := makeSlice(n)
-	res := splitSlice(slice, nCPU)
-	slices := distribution(res)
+	slices := splitSlice(slice, nCPU)
+	channels := distribution(slices)
 
 	sum := 0
-	for _, ch := range slices {
+	for _, ch := range channels {
 		sum += <-ch
 	}
 	fmt.Println("Результат:", sum)
