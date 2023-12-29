@@ -1,10 +1,4 @@
-package main
-
-import (
-	"fmt"
-	"sort"
-)
-
+```variant#1
 func solve(A [][]int) int {
 
 	points := make([][]int, 0, len(A))
@@ -15,10 +9,12 @@ func solve(A [][]int) int {
 		points = append(points, []int{elem[1], -1})
 	}
 
-	// сортируем по времени
+
+
 	sort.Slice(points, func(i, j int) bool {
 		return points[i][0] < points[j][0]
 	})
+
 
 	maxRoomNum := 0
 	currRoomNum := 0
@@ -34,12 +30,24 @@ func solve(A [][]int) int {
 	return maxRoomNum
 }
 
-func main() {
-	A := [][]int{{7, 10}, {4, 19}, {19, 26}, {14, 16}, {13, 18}, {16, 21}}
-	result := solve(A)
-	fmt.Println(result) // Вывод: 2
 
-	//B := [][]int{{1, 18}, {18, 23}, {15, 29}, {4, 15}, {2, 11}, {5, 13}}
-	//result = solve(B)
-	//fmt.Println(result) // Вывод: 4
-}
+
+
+```
+
+Оценка по времени: O(n log n), где n - количество интервалов  
+Объяснения:
+
+
+В худшем:
+В лучшем: 
+
+Оценка по памяти:
+O(n)
+
+Объяснение решения:
+1. 
+
+```variant#2
+
+```
