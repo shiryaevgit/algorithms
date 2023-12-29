@@ -21,6 +21,7 @@ func main() {
 }
 
 func calculation(slice []int, ch chan int) {
+	defer close(ch)
 	sum := 0
 	for _, v := range slice {
 		sum += v
