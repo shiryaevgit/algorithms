@@ -1,0 +1,41 @@
+```variant#1
+ 
+func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
+    dummyHead := &ListNode{}
+    curr := dummyHead
+    carry := 0
+
+    for l1 != nil || l2 != nil || carry > 0 {
+        sum := carry
+
+        if l1 != nil {
+            sum += l1.Val
+            l1 = l1.Next
+        }
+
+        if l2 != nil {
+            sum += l2.Val
+            l2 = l2.Next
+        }
+
+        curr.Next = &ListNode{Val: sum % 10}
+        curr = curr.Next
+        carry = sum / 10
+    }
+
+    return dummyHead.Next
+}
+
+```
+
+Оценка по времени: O(n), где n - размер списка
+Оценка по памяти:O(1)
+
+
+Объяснение решения:
+1. создаем dummyHead для записи результатов
+carry - добавляем это значение к сумме текущих узлов
+2.  В Цикле пока есть узлы в одном из списков или есть остаток переноса.
+3. в условиях если лист не пустой, то сумме присваиваем значение l_.Val, двигаем лист
+4. 
+

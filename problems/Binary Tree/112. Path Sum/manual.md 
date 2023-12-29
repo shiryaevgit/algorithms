@@ -1,0 +1,35 @@
+```variant#1
+
+func hasPathSum(root *TreeNode, targetSum int) bool {
+	if root == nil {
+		return false
+	}
+
+	if root.Left == nil && root.Right == nil && root.Val == targetSum {
+		return true 
+        
+	}
+
+	targetSum -= root.Val 
+
+	return hasPathSum(root.Left, targetSum) || hasPathSum(root.Right, targetSum)
+}
+```
+
+time: O(n), где n - количество вершин дерева
+memory :O(h), где h - высота дерева
+
+Объяснение решения:
+Эта функция рекурсивно проверяет пути от корня до листовых узлов. 
+Она начинает с проверки, является ли root нулевым (пустым) узлом. 
+Затем проверяет, является ли текущий узел листовым и его значение совпадает с targetSum. 
+Если да, функция возвращает true. 
+Затем вычитает значение текущего узла из targetSum и рекурсивно вызывает hasPathSum 
+для левого и правого поддеревьев. Функция возвращает true, 
+если хотя бы один из вызовов возвращает true.
+
+
+
+```variant#2
+
+```

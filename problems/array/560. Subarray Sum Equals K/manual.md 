@@ -1,0 +1,41 @@
+```variant#1
+
+func subarraySum(nums []int, k int) int {
+    prefSum:=make(map[int]int)
+    prefSum[0]=1
+    currentSum:=0
+    count:=0
+
+    for _,v := range nums {
+        currentSum+=v
+
+
+        if v,ok:=prefSum[currentSum - k];ok {
+            count+=v
+        }
+        prefSum[currentSum]++
+    }
+
+    return count
+}
+
+```
+
+Оценка по времени: O(n), где n - количество элементов
+Объяснения:
+O(n) - один цикл, идем до конца 
+В худшем: 
+В лучшем:
+
+Оценка по памяти: O(n)
+Объяснения:
+O(n) n-сколько раз сумма встречается в массиве 
+
+
+Объяснение решения:
+1. создаем мап и записываем в нее значения текущих хэшсумм, при повторении +1 к значению
+2. что происходит дальше объяснить не могу
+
+```variant#2
+
+```

@@ -1,0 +1,37 @@
+```variant#1
+"метод фиктивного сумохода" (Tortoise and Hare Algorithm) 
+или алгоритм Флойда
+
+func getIntersectionNode(headA, headB *ListNode) *ListNode {
+    slow := headA
+    fast := headB
+
+    for slow != fast {
+    
+        if slow != nil { 
+            slow = slow.Next
+        } else {
+            slow = headB 
+        }
+
+        if fast != nil {
+            fast = fast.Next
+        } else {
+            fast = headA
+        }
+    }
+
+    return slow
+}
+```
+
+Оценка по времени: O(n), где n - размер списка 
+
+Оценка по памяти: O(1)
+
+
+Объяснение решения:
+двигаем два указателя с равной скоростью, 
+когда список закончиться перескакиваем на другой список. 
+В итоге каждый указатель пройдет равное расстояние 
+и встретится в точке пересечения

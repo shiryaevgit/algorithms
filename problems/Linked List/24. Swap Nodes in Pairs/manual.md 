@@ -1,0 +1,27 @@
+```variant#1
+func swapPairs(head *ListNode) *ListNode {
+    dummyNode := &ListNode{Next: head}
+    prev := dummyNode
+
+    for prev.Next != nil && prev.Next.Next != nil {
+        firstNode := prev.Next
+        secondNode := prev.Next.Next
+
+        // Обмен значений узлов
+        firstNode.Next = secondNode.Next
+        secondNode.Next = firstNode
+        prev.Next = secondNode
+
+        // Перемещение указателя prev на два узла вперед
+        prev = firstNode
+    }
+
+    return dummyNode.Next
+}
+
+
+```
+
+Оценка по времени: O(n), где n - размер списка
+Объяснения:
+при вычислении len, O(n)

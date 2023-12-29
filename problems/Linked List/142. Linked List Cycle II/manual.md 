@@ -37,7 +37,3 @@ func detectCycle(head *ListNode) *ListNode {
 3. slow и fast сойдутся в точке входа. алгоритм обнаружения циклов Флойда
 
 
-
-```variant#2
-
-```

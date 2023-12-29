@@ -1,0 +1,31 @@
+```variant#1
+
+func postorderTraversal(root *TreeNode) []int {
+ res:=make([]int,0)
+ postrTravHelp(root,&res)
+ return res
+}
+
+func postrTravHelp(node *TreeNode, res *[]int ){
+    if node != nil {
+    postrTravHelp(node.Left, res)
+    postrTravHelp(node.Right, res)
+    *res=append(*res, node.Val)
+    }
+}
+```
+
+time: O(n), где n - количество вершин дерева
+memory :O(h), где h - высота дерева
+
+Объяснение решения:
+1. в inorderTraversal создаем res срез. 
+2. доп функция postrTravHelp для обхода дерева и добавления в res результатов
+в параметрах func postrTravHelp(node *TreeNode, res *[]int)
+res *[]int чтобы избежать лишних аллокации памяти
+3. postrTravHelp, возвращаем res
+
+
+```variant#2
+
+```

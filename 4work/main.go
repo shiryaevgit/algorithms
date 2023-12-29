@@ -11,81 +11,73 @@ type ListNode struct {
 }
 
 func main() {
-	a := []int{1, 2, 3, 4, 5, 6}
-	l1 := makeList(a)
-	l2 := makeList(a)
 
-	r := addTwoNumbers(l1, l2)
+	var ch chan int
 
-	printList(r)
+	go func() {
+		defer close(ch)
+		ch <- 1
+	}()
 
+	for {
+		v, ok := <-ch
+		if ok {
+			fmt.Println(v)
+		}
+		break
+	}
+}
+
+func sliceMath(i []int) {
+	i = append(i, 10, 15)
+}
+
+func swapPairs(head *ListNode) *ListNode {
+
+	dummyNode := &ListNode{Next: head}
+
+	curr := head
+	tmp := curr
+
+	for curr != nil {
+		tmp = curr
+		curr = curr.Next
+
+		dummyNode.Next = curr.Next
+		curr.Next = tmp
+		tmp.Next = dummyNode
+		curr = tmp
+	}
+
+	return dummyNode
 }
 
 // addTwoNumbers
+
 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
-	l1 = reverss(l1)
-	l2 = reverss(l2)
-	num := ListToNum(l1) + ListToNum(l2)
-	arr := numToSlice(num)
-	fmt.Println(arr)
-	res := MakeList(arr)
-	res = reverss(res)
-	return res
-}
-func MakeList(arr []int) *ListNode {
-	var head *ListNode
-	tail := head
+	dummyHead := &ListNode{}
+	curr := dummyHead
+	carry := 0
 
-	for _, v := range arr {
+	for l1 != nil || l2 != nil || carry > 0 {
+		sum := carry
 
-		newNode := &ListNode{Val: v}
-		if head == nil {
-			head = newNode
-			tail = newNode
-		} else {
-			tail.Next = newNode
-			tail = newNode
+		if l1 != nil {
+			sum += l1.Val
+			l1 = l1.Next
 		}
-	}
-	return head
-}
-func reverss(head *ListNode) *ListNode {
-	var prew *ListNode = nil
 
-	cur, tmp := head, head
+		if l2 != nil {
+			sum += l2.Val
+			l2 = l2.Next
+		}
 
-	for cur != nil {
-		tmp = cur
-		cur = cur.Next
-
-		tmp.Next = prew
-		prew = tmp
-	}
-	return tmp
-}
-func ListToNum(head *ListNode) int {
-	cur := head
-	res := 0
-
-	for cur != nil {
-		res = res*10 + cur.Val
-		cur = cur.Next
-	}
-	return res
-}
-func numToSlice(n int) []int {
-	if n == 0 {
-		return []int{0}
+		curr.Next = &ListNode{Val: sum % 10}
+		curr = curr.Next
+		carry = sum / 10
 	}
 
-	digits := []int{}
-
-	for n > 0 {
-		digit := n % 10
-		digits = append([]int{digit}, digits...)
-		n /= 10
-	}
-	return digits
+	return dummyHead.Next
 }
 
 //

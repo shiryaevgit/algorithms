@@ -1,0 +1,40 @@
+```variant#1
+
+func levelOrder(root *TreeNode) [][]int {
+	res := make([][]int, 0)
+
+	preOrder(root, &res, 0)
+	return res
+}
+
+func preOrder(node *TreeNode, res *[][]int, level int) {
+	if node == nil {
+		return
+	}
+	if level == len(*res) {
+		*res = append(*res, []int{})
+	}
+
+	(*res)[level] = append((*res)[level], node.Val)
+
+	preOrder(node.Left, res, level+1)
+	preOrder(node.Right, res, level+1)
+}
+
+```
+
+time: O(n), где n - количество вершин дерева
+memory :O(h), где h - высота дерева
+
+Объяснение решения:
+1. в inorderTraversal создаем []res, передаем в preOrder, *res
+2. preOrder
+   if level == len(*res) {
+    *res = append(*res, []int{}) // добавляем новый срез
+   }
+
+
+
+```variant#2
+
+```

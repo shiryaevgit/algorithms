@@ -1,0 +1,23 @@
+```variant#1
+
+func isSameTree(p *TreeNode, q *TreeNode) bool {
+	if p == nil || q == nil {
+		return p == nil && q == nil
+	}
+	if p.Val != q.Val {
+		return false
+	}
+	return isSameTree(p.Left, q.Left) && isSameTree(p.Right, q.Right)
+}
+
+```
+
+time: O(n), где n - количество вершин дерева
+memory :O(h), где h - высота дерева
+
+Объяснение решения:
+
+
+```variant#2
+
+```

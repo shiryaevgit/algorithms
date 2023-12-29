@@ -11,10 +11,74 @@ type ListNode struct {
 }
 
 func main() {
-	list1 := makeList([]int{1, 2, 4})
-	list2 := makeList([]int{0, 1, 2})
-	res := mergeKLists([]*ListNode{list1, list2})
+	list1 := makeList([]int{1, 1, 2, 2, 3, 4})
+	res := deleteDuplicates(list1)
 	res.Print()
+}
+
+func partition(head *ListNode, x int) *ListNode {
+	before := &ListNode{}
+	after := &ListNode{}
+	before_curr := before
+	after_curr := after
+
+	for head != nil {
+		if head.Val < x {
+			before_curr.Next = head
+			before_curr = before_curr.Next
+		} else {
+			after_curr.Next = head
+			after_curr = after_curr.Next
+		}
+		head = head.Next
+	}
+
+	after_curr.Next = nil
+	before_curr.Next = after.Next
+
+	return before.Next
+}
+
+// Remove Duplicates from Sorted List ---------------
+func deleteDuplicates(head *ListNode) *ListNode {
+
+	dummyNode := &ListNode{Next: head}
+	pred := dummyNode
+
+	for head != nil {
+		if head.Next != nil && head.Val == head.Next.Val {
+			for head.Next != nil && head.Val == head.Next.Val {
+				head = head.Next
+			}
+			pred.Next = head.Next
+		} else {
+			pred = pred.Next
+		}
+		head = head.Next
+	}
+
+	return dummyNode.Next
+}
+
+func getIntersectionNode(headA, headB *ListNode) *ListNode {
+	var res *ListNode = nil
+
+	p1 := headA
+	p2 := headB
+
+	for p1.Next != nil && p1 != nil {
+
+		for p2.Next != nil && p2 != nil {
+			if p1.Next == p2.Next {
+				res = p1
+				return res
+			} else {
+				p2 = p2.Next
+			}
+		}
+		p1 = p1.Next
+	}
+	return res
 }
 
 // mergeKLists -----------------------------

@@ -1,0 +1,72 @@
+```variant#1
+
+func isOverlapping(a, b []int) bool { // проверка на пересечение
+	return max(a[0], b[0]) <= min(a[1], b[1])
+}
+
+func mergeTwoIntervals(a, b []int) []int { // объединение пересекаемых интервалов
+	return []int{a[0], max(a[1], b[1])} // можно написать a[0] вместо min(a[0], b[0]), так как интервалы отсортированы
+}
+
+func merge(intervals [][]int) [][]int {
+	// сортируем по первому элементу
+	sort.Slice(intervals, func(i, j int) bool {
+		return intervals[i][0] < intervals[j][0]
+	})
+	// создаем результирующий срез
+	result := make([][]int, 0)
+	// добавляем в него первый элемент
+	result = append(result, intervals[0])
+
+	for i := 1; i < len(intervals); i++ {
+		interval := intervals[i]
+		if isOverlapping(result[len(result)-1], interval) { // если последний в res и текущий в interval
+			result[len(result)-1] = mergeTwoIntervals(result[len(result)-1], interval) // обновляем текущий интервал в result
+		} else {
+			result = append(result, interval) // если нет, добавляем в result текущий interval
+		}
+	}
+
+	return result
+}
+
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}
+
+func min(a, b int) int {
+	if a < b {
+		return a
+	}
+	return b
+}
+
+func main() {
+	intervals := [][]int{{1, 3}, {2, 6}, {8, 10}, {15, 18}}
+	result := merge(intervals)
+	fmt.Println(result)
+}
+
+
+```
+
+Оценка по времени: O(n lo n)
+
+Оценка по памяти:  
+O(1) - если не считаем ответ
+O(n) - если считаем ответ, худший случай когда никакие интервалы не пересекаются
+
+Объяснение решения:
+1. Создаем вспомогательные функции, min,max,isOverlapping, mergeTwoIntervals
+2. Так как по условиям интервалы не отсортированы, сортируем по первой точке
+3. кладем в результирующий массив, первый интервал, с него начнется сравнение
+4. будем сравнивать текущий последний в res, с curr в отсортированном (проверка пересечения),
+если да объединяем, обновляем в res последний, если нет добавляем в res curr
+5. возвращаем res
+
+```variant#2
+
+```

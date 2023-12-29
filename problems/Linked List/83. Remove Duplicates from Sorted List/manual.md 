@@ -1,0 +1,38 @@
+```variant#1
+func deleteDuplicates(head *ListNode) *ListNode {
+	cur := head
+	tmp := cur
+
+	for cur != nil && cur.Next != nil {
+		tmp = cur.Next
+
+		if cur.Val == tmp.Val {
+			cur.Next = cur.Next.Next
+
+		} else {
+			cur = cur.Next
+		}
+	}
+	return head
+}
+
+```
+
+Оценка по времени: O(n), где n - размер списка
+Объяснения:
+при вычислении len, O(n)
+при поиске элемента для удаления, так же O(n)
+В сумме в худшем случае О(2n), в big аннотации O(n)
+В лучшем случае O(2)
+
+Оценка по памяти:  
+O(1)
+Не используем рекурсию поэтому O(1)
+
+Объяснение решения:
+1.
+
+
+```variant#2
+
+```

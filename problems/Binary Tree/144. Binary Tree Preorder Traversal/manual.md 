@@ -1,0 +1,33 @@
+```variant#1
+func preorderTraversal(root *TreeNode) []int {
+	res := make([]int, 0)
+	preorderHelp(root, &res)
+	return res
+}
+
+func preorderHelp(node *TreeNode, res *[]int) {
+	if node == nil {
+		return
+	}
+
+	*res = append(*res, node.Val)
+	preorderHelp(node.Left, res)
+	preorderHelp(node.Right, res)
+}
+
+```
+
+time: O(n), где n - количество вершин дерева
+memory :O(h), где h - высота дерева
+
+Объяснение решения:
+1. в preorderTraversal создаем res срез. 
+2. доп функция preorderHelp для обхода дерева и добавления в res результатов
+в параметрах func preorderHelp(node *TreeNode, res *[]int)
+res *[]int чтобы избежать лишних аллокации памяти
+3. preorderTraversal, возвращаем res
+
+
+```variant#2
+
+```
