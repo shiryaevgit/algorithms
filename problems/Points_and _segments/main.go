@@ -42,4 +42,5 @@ func main() {
 	//B := [][]int{{1, 18}, {18, 23}, {15, 29}, {4, 15}, {2, 11}, {5, 13}}
 	//result = solve(B)
 	//fmt.Println(result) // Вывод: 4
+
 }

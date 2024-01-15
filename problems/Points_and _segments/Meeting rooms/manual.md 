@@ -1,53 +1,43 @@
 ```variant#1
-func solve(A [][]int) int {
 
-	points := make([][]int, 0, len(A))
+func search(nums []int, target int) int {
+	// Инициализация переменных l (левая граница) и r (правая граница).
+	l, r := 0, len(nums)
 
-	// заполняем points
-	for _, elem := range A {
-		points = append(points, []int{elem[0], 1})
-		points = append(points, []int{elem[1], -1})
-	}
+	for r-l > 1 { // идем по циклу пока указатели не будут рядом
 
+		m := (l + r) / 2 // Находим середину массива.
 
-
-	sort.Slice(points, func(i, j int) bool {
-		return points[i][0] < points[j][0]
-	})
-
-
-	maxRoomNum := 0
-	currRoomNum := 0
-
-	//
-	for _, point := range points {
-		currRoomNum += point[1]
-		if currRoomNum > maxRoomNum {
-			maxRoomNum = currRoomNum
+		if nums[m] <= target { // находим новую зону поиска, сдвигаем один из указателей
+			l = m
+		} else {
+			r = m
 		}
 	}
 
-	return maxRoomNum
+	if nums[l] == target { // на выходе, когда указатели "соседи", сверяем левый с таргет
+		return l
+	}
+	return -1
 }
 
-
-
-
 ```
-
-Оценка по времени: O(n log n), где n - количество интервалов  
-Объяснения:
+найти индекс target, если его нет -1
 
 
-В худшем:
-В лучшем: 
+Оценка по времени: O(log n), где n - количество элементов  
+log n с основанием 2
 
 Оценка по памяти:
-O(n)
+O(1)
 
 Объяснение решения:
-1. 
-
+1. инициализируем два крайних указателя, равных 0 и длине массива
+2. идем по циклу пока l и r не соседи
+3. на каждом цикле находим новую середину
+4. в зависимости того с какой из сторон находится таргет сдвигаем указатели, обозначая тем самым новую зону поиска
+5. когда l и r соседи, выходим из цикла, проверяем равен ли nums[l]==target 
+6. по результату возвращаем его индекс l или -1
 ```variant#2
 
 ```
